@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliophile's Retreat</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header with Admin Button -->
+    <header>
+        <h1>Bibliophile's Retreat</h1>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="/borrowed_books">My Account</a>
+            <a href="/contact">Contact Us</a>
+            <!-- Add a button to switch to Admin mode -->
+            <button class="admin-btn" onclick="location.href='/admin'">Admin Mode</button>
+        </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <h2>Available Books</h2>
+        <div class="search-container">
+            <form action="/" method="POST">
+                <input type="text" name="search" placeholder="Search for books..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="book-list">
+            {% for book in books %}
+            <div class="book-card">
+                <h3>{{ book.title }}</h3>
+                <p>Author: {{ book.author }}</p>
+                <p>Category: {{ book.category }}</p>
+                <p>Available: {{ book.available }} copies</p>
+                <a href="/borrow/{{ book.id }}" class="borrow-btn">Borrow Book</a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- Display Flash Messages -->
+<div class="flash-messages">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Bibliophile's Retreat by Kevin. All Rights Reserved</p>
+    </footer>
+</body>
+</html>
