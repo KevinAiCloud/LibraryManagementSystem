@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book - Bibliophile's Retreat</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <!-- Flash Messages Display -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    <ul class="flash-messages">
+        {% for category, message in messages %}
+            <li class="flash-message {{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
+
+    <!-- Admin Dashboard Header -->
+    <header>
+        <h1>Admin Dashboard - Update Book</h1>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="/admin/add">Add Book</a>
+            <a href="/overdue">View Overdue Books</a>
+            <button class="admin-btn" onclick="location.href='/admin'">Admin Mode</button>
+        </nav>
+    </header>
+
+    <!-- Book Update Form -->
+    <main>
+        <h2>Update Book Details</h2>
+        <form method="POST">
+            <input type="text" name="title" value="{{ book.title }}" required>
+            <input type="text" name="author" value="{{ book.author }}" required>
+            <input type="text" name="category" value="{{ book.category }}" required>
+            <input type="number" name="available" value="{{ book.available }}" required>
+            <button type="submit">Update</button>
+        </form>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Bibliophile's Retreat by Kevin. All Rights Reserved</p>
+    </footer>
+</body>
+</html>
